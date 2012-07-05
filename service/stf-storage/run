@@ -1,0 +1,15 @@
+#!/bin/bash
+
+CDIR=$(cd $(dirname $0) && pwd)
+source $CDIR/env.sh
+cd $STF_HOME
+exec 2>&1
+exec setuidgid $STF_USER $PERLOPT\
+    -S start_server\
+    --port=$STF_STORAGE_PORT\
+    --pid-file=/home/$STF_USER/var/run/stf-storage.pid\
+    --status-file=/home/$STF_USER/var/run/str-storage.status\
+    --interval 2\
+    -- $PERLOPT -S plackup -s Starlet --workers 10 -a $STF_HOME/etc/storage.psgi
+
+

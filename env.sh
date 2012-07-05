@@ -1,13 +1,19 @@
 #!/bin/bash
 export STF_HOST_ID=101
-export STF_HOME=$HOME/project/stf
+export STF_HOME=/usr/local/stf
+export STF_USER=takuji
+
+#uncomment this if use The Schwartz
 #export STF_QUEUE_TYPE=Schwartz
+
+
+#Debug envrionment
 #export STF_DEBUG=1
-#export STF_TIEMR=1
+#export STF_TIMER=1
 
 ## Nginx
-#export STF_NGINX_STYLE_PROXY=1
-#export STF_NGINX_STYLE_REPROXY_ACCEL_REDIRECT_URL=/path/to/reproxy
+export STF_NGINX_STYLE_REPROXY=1
+export STF_NGINX_STYLE_REPROXY_ACCEL_REDIRECT_URL=/reproxy
 #export USE_PLACK_REPROXY=1
 
 ## MySQL
@@ -20,17 +26,18 @@ export STF_QUEUE_PASSWORD=''
 
 #export STF_ENABLE_STORAGE_META=1
 #export STF_ENABLE_OBJECT_META=1
+export STF_DISPATCHER_PORT=8887
 ## Storage
-# ここは自分でディレクトリを作る(書き込みできること)
-export STF_STORAGE_ROOT=$HOME/var/stf/storage
+# Storage path (writable and exists)
+export STF_STORAGE_ROOT=/var/stf/storage
 export STF_STORAGE_PORT=8888
 
 ## Admin Interface
 export STF_ADMIN_PORT=9000
 
-export PERLBREW_ROOT=/home/takuji/perl5/perlbrew
-export PERLBREW_HOME=/home/takuji/.perlbrew
-source ${PERLBREW_ROOT}/etc/bashrc
+export PERLBREW_ROOT=/usr/local/perlbrew/perlbrew
+export PERLBREW_HOME=/usr/local/perlbrew/home
+source $PERLBREW_ROOT/etc/bashrc
 
 export PATH="$STF_HOME/extlib/bin:$PATH"
-alias plackup="perl -I $STF_HOME/extlib/lib/perl5 -S plackup "
+export PERLOPT="perl -I $STF_HOME/extlib/lib/perl5 -I $STF_HOME/lib"

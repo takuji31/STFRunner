@@ -1,0 +1,5 @@
+#!/bin/sh
+CDIR=$(cd $(dirname $0) && pwd)
+source $CDIR/../env.sh
+exec 2>&1
+exec setuidgid $STF_USER multilog t ./main
